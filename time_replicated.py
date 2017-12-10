@@ -1,9 +1,6 @@
-import etcd
-import controller
 import distributed
-from collections import defaultdict
-client = controller.controller
 
+# The module of the function being altered
 import time
 
 time.time = distributed.generate_distributed(time.time)
