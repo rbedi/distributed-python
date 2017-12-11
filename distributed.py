@@ -25,10 +25,12 @@ def generate_distributed(orig):
         except Exception as e:
             value = (False, e)
 
+        controller.disable_replication()
         try:
             client.write(key, pickle.dumps(value).hex(), prevExist=False)
         except etcd.EtcdAlreadyExist:
             value = pickle.loads(bytes.fromhex(client.read(key).value))
+        controller.enable_replication()
 
         success, val = value
         if success: return val
