@@ -12,6 +12,9 @@ func_ctrs = defaultdict(int)
 def generate_distributed(orig):
 
     def new_func(*args, **kwargs):
+        if not controller.replication_enabled:
+            return orig(*args, **kwargs)
+
         name = orig.__module__ + "." + orig.__name__
         global func_ctrs
         func_ctrs[name] += 1
