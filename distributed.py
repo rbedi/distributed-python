@@ -37,3 +37,31 @@ def generate_distributed(orig):
         else: raise val
 
     return new_func
+
+def generate_distributed_locked(orig):
+    def new_func(*args, **kwargs):
+        if not controller.replication_enabled:
+            return orig(*args, **kwargs)
+
+        name = orig.__module__ + "." + orig.__name__
+        global func_ctrs
+        func_ctrs[name] += 1
+        key = name + '_' + str(func_ctrs[name])
+
+        lock = etcd.Lock(client, key + "_lock")
+        lock.acquire(blocking=True, lock_ttl=2)
+
+        try:
+            value = pickle.loads(bytes.fromhex(client.read(key).value))
+        except etcd.EtcdKeyNotFound:
+            try: value = (True, orig(*args, **kwargs))
+            except Exception as e: value = (False, e)
+            client.write(key, pickle.dumps(value).hex(), prevExist=False)
+
+        lock.release()
+
+        success, val = value
+        if success: return val
+        else: raise val
+
+    return new_func
