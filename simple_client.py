@@ -1,1 +1,3 @@
-import time_replicated
+import replicated_functions.time
+import replicated_functions.input
+import replicated_functions.rename

@@ -1,2 +1,10 @@
 *.pyc
 *.out
+__pycache__/
+.ropeproject/
+*.etcd
+Procfile
+*.out
+*.log
+.gitignore
+*.sw*
