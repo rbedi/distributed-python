@@ -11,5 +11,3 @@ def enable_replication():
 
 port = os.getenv("ETCD_CLIENT_PORT", 2379)
 controller = etcd.Client(port=port)
-
-disable_replication()
