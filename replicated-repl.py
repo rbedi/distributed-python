@@ -1,4 +1,5 @@
 import dist_input
+import time_replicated
 import traceback
 
 while True:
