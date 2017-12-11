@@ -1,10 +1,12 @@
 import sys
 import select
 import tty
+import builtins
+import etcd
 
 from controller import controller
 
-original_input = input
+original_input = builtins.input
 
 def call_key_generator(prefix):
     counter = 0
@@ -29,10 +31,13 @@ def dist_input(prompt):
             break
         else:
             try:
-                controller.read(call_key)
+                value = controller.read(call_key).value
+                sys.stdout.write(value)
+                sys.stdout.write("\n")
+                sys.stdout.flush()
                 break
             except etcd.EtcdKeyNotFound:
                 pass
     return controller.read(call_key).value
 
-input = dist_input
+builtins.input = dist_input
