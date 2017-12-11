@@ -1,5 +1,6 @@
 import utils.bad_clock
 import simple_client
+import median_time
 
-import datetime
-print(datetime.datetime.now())
+import time
+print(time.time())
