@@ -1,4 +1,4 @@
-touch before
+touch 0
 
 tmux \
   new-session  "python3 non-idempotent-test.py; read" \; \
@@ -6,4 +6,4 @@ tmux \
   split-window "python3 non-idempotent-test.py; read" \; \
   select-layout even-horizontal
 
-rm after
+rm 10
