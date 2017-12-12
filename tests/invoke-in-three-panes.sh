@@ -1,7 +1,7 @@
 rm -rf *.etcd
 
 export DISCOVERY_URL=$(curl https://discovery.etcd.io/new?size=1)
-# export SCRIPT_PATH=${1}
+export SCRIPT_PATH=${1}
 
 tmux \
   new-session './etc.sh n1 10.138.0.3' \; \
