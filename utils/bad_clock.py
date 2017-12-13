@@ -1,5 +1,6 @@
 import os
 import time
 
-if 'BADCLOCK' in os.environ:
-    time.time = lambda: 0
+if 'NODE_NAME' in os.environ:
+    if os.getenv('NODE_NAME') == 'n1':
+        time.time = lambda: 0
