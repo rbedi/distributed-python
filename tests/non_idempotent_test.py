@@ -8,3 +8,4 @@ import simple_client
 
 for i in range(10):
     os.rename(str(i), str(i + 1))
+    print('{} -> {}'.format(i, i+1))
