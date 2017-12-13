@@ -10,6 +10,7 @@ sys.path.insert(0,parentdir)
 import simple_client
 
 num_time = int(sys.argv[1])
+expt_name = sys.argv[2]
 
 for i in range(num_time):
     if i == 1:
@@ -22,6 +23,6 @@ end = datetime.datetime.now()
 
 elapsed = end - start
 
-with open('/home/rishi/benchmark.csv', 'a') as f:
+with open('/home/rishi/' + expt_name + '.csv', 'a') as f:
     print(elapsed.total_seconds())
     print('{},{}'.format(num_time, elapsed.total_seconds()), file=f)
