@@ -23,4 +23,5 @@ end = datetime.datetime.now()
 elapsed = end - start
 
 with open('/home/rishi/benchmark.csv', 'a') as f:
+    print(elapsed.total_seconds())
     print('{},{}'.format(num_time, elapsed.total_seconds()), file=f)
