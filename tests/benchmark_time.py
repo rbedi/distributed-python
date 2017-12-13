@@ -9,10 +9,18 @@ sys.path.insert(0,parentdir)
 
 import simple_client
 
-for i in range(100):
+num_time = int(sys.argv[1])
+
+for i in range(num_time):
     if i == 1:
-        print (datetime.datetime.now())
+        start = datetime.datetime.now()
     a = time.time()
-    mat = np.random.rand(400,400)
-    u,s,v = np.linalg.svd(mat)
-print(datetime.datetime.now())
+
+mat = np.random.rand(900,900)
+u,s,v = np.linalg.svd(mat)
+end = datetime.datetime.now()
+
+elapsed = end - start
+
+with open('/home/rishi/benchmark.csv', 'a') as f:
+    print('{},{}'.format(num_time, elapsed.total_seconds()), file=f)
